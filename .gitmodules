@@ -1,0 +1,6 @@
+[submodule "apps/servers/bune-auth"]
+	path = apps/servers/bune-auth
+	url = https://github.com/bunedev/bune-auth.git
+[submodule "apps/servers/bune-gateway"]
+	path = apps/servers/bune-gateway
+	url = https://github.com/bunedev/bune-gateway.git
