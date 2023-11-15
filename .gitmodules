@@ -10,3 +10,6 @@
 [submodule "apps/servers/bune-blog"]
 	path = apps/servers/bune-blog
 	url = https://github.com/bunedev/bune-blog.git
+[submodule "apps/servers/bune-crawler"]
+	path = apps/servers/bune-crawler
+	url = https://github.com/bunedev/bune-crawler.git
