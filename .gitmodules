@@ -7,3 +7,6 @@
 [submodule "apps/clients/bunu"]
 	path = apps/clients/bunu
 	url = https://github.com/bunedev/bunu.git
+[submodule "apps/servers/bune-blog"]
+	path = apps/servers/bune-blog
+	url = https://github.com/bunedev/bune-blog.git
