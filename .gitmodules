@@ -4,6 +4,6 @@
 [submodule "apps/servers/bune-gateway"]
 	path = apps/servers/bune-gateway
 	url = https://github.com/bunedev/bune-gateway.git
-[submodule "apps/clients/bune"]
-	path = apps/servers/bune-gateway
+[submodule "apps/clients/bunu"]
+	path = apps/clients/bunu
 	url = https://github.com/bunedev/bunu.git
