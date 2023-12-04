@@ -13,3 +13,9 @@
 [submodule "apps/servers/bune-crawler"]
 	path = apps/servers/bune-crawler
 	url = https://github.com/bunedev/bune-crawler.git
+[submodule "apps/servers/bune-payment"]
+	path = apps/servers/bune-payment
+	url = https://github.com/bunedev/bune-payment.git
+[submodule "apps/servers/bune-base"]
+	path = apps/servers/bune-base
+	url = https://github.com/bunedev/bune-base.git
