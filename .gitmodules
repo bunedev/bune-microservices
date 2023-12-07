@@ -1,3 +1,5 @@
+
+# service
 [submodule "apps/servers/bune-auth"]
 	path = apps/servers/bune-auth
 	url = https://github.com/bunedev/bune-auth.git
@@ -19,3 +21,8 @@
 [submodule "apps/servers/bune-base"]
 	path = apps/servers/bune-base
 	url = https://github.com/bunedev/bune-base.git
+
+# libraries
+[submodule "apps/libraries/common"]
+	path = apps/libraries/common
+	url = https://github.com/bunedev/common.git
