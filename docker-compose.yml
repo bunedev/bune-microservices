@@ -41,3 +41,5 @@ networks:
   auth-domain:
 volumes:
   auth-data:
+  pg_data:
+  redis_data:
