@@ -10,43 +10,30 @@ services:
       - apps/servers/bune-auth/.env # Sử dụng đường dẫn tương đối đến tệp .env
     volumes:
       - ./apps/servers/bune-auth:/app # Liên kết thư mục nguồn với container
-    depends_on:
-      - "auth-db"
-      - "cache"
     networks:
       - backend
       - auth-domain
-  auth-db:
-    image: "postgres:15"
-    container_name: "auth-db"
+  postgres:
+    image: postgres:latest
     ports:
-      - 5432:5432
-    volumes:
-      - auth-data:/var/lib/postgresql/data
+      - "5432:5432"
     environment:
-      POSTGRES_USER: "admin"
-      POSTGRES_PASSWORD: "master123"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 30s
-      timeout: 30s
-      retries: 3
-    restart: "on-failure"
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=master123
+      - POSTGRES_DB=postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data
     networks:
-      - auth-domain
-  cache:
-    image: "redis:5-alpine"
-    container_name: "redis-cache"
-    expose:
-      - "6379"
-    healthcheck:
-      test: ["CMD-SHELL", "redis-cli ping"]
-      interval: 30s
-      timeout: 30s
-      retries: 3
-    restart: "on-failure"
+      - backend
+  redis:
+    image: redis:latest
+    restart: always
+    command: redis-server --save 20 1 --loglevel warning --requirepass master123
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
     networks:
-      - frontend
       - backend
 networks:
   frontend:
