@@ -10,6 +10,9 @@ services:
       - apps/servers/bune-auth/.env # Sử dụng đường dẫn tương đối đến tệp .env
     volumes:
       - ./apps/servers/bune-auth:/app # Liên kết thư mục nguồn với container
+    depends_on:
+      - redis
+      - postgres
     networks:
       - backend
       - auth-domain
@@ -28,7 +31,7 @@ services:
   redis:
     image: redis:latest
     restart: always
-    command: redis-server --save 20 1 --loglevel warning --requirepass master123
+    command: redis-server --save --loglevel warning --requirepass master123
     volumes:
       - redis_data:/data
     ports:
