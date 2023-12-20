@@ -9,7 +9,7 @@ services:
     env_file:
       - apps/servers/bune-auth/.env # Sử dụng đường dẫn tương đối đến tệp .env
     volumes:
-      - auth-data:/app
+      -./apps/servers/bune-auth:/app
     depends_on:
       - redis
       - postgres
@@ -25,7 +25,7 @@ services:
     env_file:
       - apps/servers/bune-blog/.env # Sử dụng đường dẫn tương đối đến tệp .env
     volumes:
-      - blog-data:/app # Liên kết thư mục nguồn với container
+      - ./apps/servers/bune-blog:/app # Liên kết thư mục nguồn với container
     depends_on:
       - redis
       - postgres
