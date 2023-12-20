@@ -37,7 +37,7 @@ services:
       context: ./apps/servers/bune-gateway
       dockerfile: Dockerfile
     ports:
-      - "9697:9697" # Cấu hình cổng bạn muốn sử dụng
+      - "9000:9000" # Cấu hình cổng bạn muốn sử dụng
     env_file:
       - apps/servers/bune-gateway/.env # Sử dụng đường dẫn tương đối đến tệp .env
     volumes:
