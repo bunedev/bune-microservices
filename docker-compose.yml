@@ -9,13 +9,29 @@ services:
     env_file:
       - apps/servers/bune-auth/.env # Sử dụng đường dẫn tương đối đến tệp .env
     volumes:
-      - ./apps/servers/bune-auth:/app # Liên kết thư mục nguồn với container
+      - auth-data:/app
     depends_on:
       - redis
       - postgres
     networks:
       - backend
       - auth-domain
+  bune-blog:
+    build:
+      context: ./apps/servers/bune-blog
+      dockerfile: Dockerfile
+    ports:
+      - "9698:9698" # Cấu hình cổng bạn muốn sử dụng
+    env_file:
+      - apps/servers/bune-blog/.env # Sử dụng đường dẫn tương đối đến tệp .env
+    volumes:
+      - blog-data:/app # Liên kết thư mục nguồn với container
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - backend
+      - blog-domain
   bune-gateway:
     build:
       context: ./apps/servers/bune-gateway
@@ -25,13 +41,14 @@ services:
     env_file:
       - apps/servers/bune-gateway/.env # Sử dụng đường dẫn tương đối đến tệp .env
     volumes:
-      - ./apps/servers/bune-gateway:/app # Liên kết thư mục nguồn với container
+      - gateway-data:/app # Liên kết thư mục nguồn với container
     depends_on:
       - redis
       - postgres
     networks:
       - backend
       - auth-domain
+      - blog-domain
   postgres:
     image: postgres:latest
     ports:
@@ -58,7 +75,10 @@ networks:
   frontend:
   backend:
   auth-domain:
+  blog-domain:
 volumes:
   auth-data:
+  blog-data:
+  gateway-data:
   pg_data:
   redis_data:
