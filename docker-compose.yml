@@ -16,6 +16,22 @@ services:
     networks:
       - backend
       - auth-domain
+  bune-gateway:
+    build:
+      context: ./apps/servers/bune-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "9697:9697" # Cấu hình cổng bạn muốn sử dụng
+    env_file:
+      - apps/servers/bune-gateway/.env # Sử dụng đường dẫn tương đối đến tệp .env
+    volumes:
+      - ./apps/servers/bune-gateway:/app # Liên kết thư mục nguồn với container
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - backend
+      - auth-domain
   postgres:
     image: postgres:latest
     ports:

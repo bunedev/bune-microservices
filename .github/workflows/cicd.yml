@@ -23,7 +23,7 @@ jobs:
       - name: Build and Run Docker Container for bune-auth
         working-directory: apps/servers/bune-auth
         run: |
-          docker build --tag bune-auth-image .
+          docker build --tag bune-auth .
           docker run -d bune-auth-image
 
   bune-gateway-job:
