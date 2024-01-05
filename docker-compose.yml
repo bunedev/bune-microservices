@@ -19,7 +19,7 @@ services:
     ports:
       - "9698:9698" # Cấu hình cổng bạn muốn sử dụng
     env_file:
-      - env/.env # Sử dụng đường dẫn tương đối đến tệp .env
+      - env/blog.env # Sử dụng đường dẫn tương đối đến tệp .env
     environment:
       - APP_PORT=9698
       - DATABASE_URL=postgresql://admin:master123@localhost:5432/bune-blog?schema=public
