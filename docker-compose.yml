@@ -1,32 +1,25 @@
 version: '3'
 services:
-  # bune-auth:
-  #   build:
-  #     context: ./apps/servers/bune-auth
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "9697:9697" # Cấu hình cổng bạn muốn sử dụng
-  #   env_file:
-  #     - apps/servers/bune-auth/.env # Sử dụng đường dẫn tương đối đến tệp .env
-  #   volumes:
-  #     -./apps/servers/bune-auth:/app
-  #   depends_on:
-  #     - redis
-  #     - postgres
-  #   networks:
-  #     - backend
-  #     - auth-domain
+  bune-auth:
+    image: devhoangkien/bune-auth:latest
+    ports:
+      - "9697:9697" # Cấu hình cổng bạn muốn sử dụng
+    env_file:
+      - apps/servers/bune-auth/.env # Sử dụng đường dẫn tương đối đến tệp .env
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - backend
+      - auth-domain
   bune-blog:
-    # build:
-    #   context: ./apps/servers/bune-blog
-    #   dockerfile: Dockerfile
     container_name: bune-blog
     image: devhoangkien/bune-blog:latest
     restart: always
     ports:
       - "9698:9698" # Cấu hình cổng bạn muốn sử dụng
-    # env_file:
-    #   - apps/servers/bune-blog/.env # Sử dụng đường dẫn tương đối đến tệp .env
+    env_file:
+      - apps/servers/bune-blog/.env # Sử dụng đường dẫn tương đối đến tệp .env
     environment:
       - APP_PORT=9698
       - DATABASE_URL=postgresql://admin:master123@localhost:5432/bune-blog?schema=public
@@ -38,10 +31,11 @@ services:
     networks:
       - backend
       - blog-domain
+
   bune-gateway:
-    build:
-      context: ./apps/servers/bune-gateway
-      dockerfile: Dockerfile
+    container_name: bune-gateway
+    image: devhoangkien/bune-gateway:latest
+    restart: always
     ports:
       - "9000:9000" # Cấu hình cổng bạn muốn sử dụng
     env_file:
@@ -55,14 +49,7 @@ services:
       - backend
       - auth-domain
       - blog-domain
-  watchtower:
-    container_name: watchtower
-    image: containrrr/watchtower
-    environment:
-      - WATCHTOWER_CLEANUP=true
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval 30 bune-blog
+
   postgres:
     image: postgres:latest
     ports:
