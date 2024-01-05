@@ -1,44 +1,24 @@
-name: CICD Workflow
+name: Docker Compose CI/CD
 
 on:
   push:
     branches:
       - main
-    paths:
-      - 'apps/servers/bune-auth/**'
-      - 'apps/servers/bune-gateway/**'
-      # - 'apps/clients/bunu/**'
-      # Thêm các submodule khác tương tự nếu cần
 
 jobs:
-  bune-auth-job:
-    if: contains(github.event.commits[*].added.*,'apps/servers/bune-auth') || contains(github.event.commits[*].modified.*,'apps/servers/bune-auth')
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
         with:
-          submodules: 'recursive' # Ensure submodules are checked out
-
-      - name: Build and Run Docker Container for bune-auth
-        working-directory: apps/servers/bune-auth
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+          
+      - name: Deploy with Docker Compose
         run: |
-          docker build --tag bune-auth .
-          docker run -d bune-auth-image
-
-  bune-gateway-job:
-    if: contains(github.event.commits[*].added.*,'apps/servers/bune-gateway') || contains(github.event.commits[*].modified.*,'apps/servers/bune-gateway')
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-        with:
-          submodules: 'recursive' # Ensure submodules are checked out
-
-      - name: Build and Run Docker Container for bune-gateway
-        working-directory: apps/servers/bune-gateway
-        run: |
-          docker build -t bune-gateway-image .
-          docker run -d bune-gateway-image
-
-  # Định nghĩa các jobs khác cho các submodule khác
+          docker-compose up -d
