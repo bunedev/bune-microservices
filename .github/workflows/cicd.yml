@@ -19,6 +19,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
           
-      - name: Deploy with Docker Compose
+      # Deploy to Ubuntu VPS
+      - name: Deploy to Ubuntu VPS
         run: |
-          docker-compose up -d
+          sudo apt-get update
+          sudo apt-get install -y sshpass
+          sshpass -p "${{ secrets.DEPLOY_PASSWORD }}" ssh ubuntu@140.238.204.230 'cd bune-microservices && docker-compose pull && docker-compose up -d'
+        env:
+          DEPLOY_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
