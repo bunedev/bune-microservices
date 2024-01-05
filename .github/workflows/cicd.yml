@@ -24,6 +24,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y sshpass
-          sshpass -p"${{ secrets.DEPLOY_PASSWORD }}" ssh -o StrictHostKeyChecking=no ubuntu@140.238.204.230 'cd bune-microservices && sudo docker compose pull && sudo docker compose up -d'
+          sshpass -p"${{ secrets.DEPLOY_PASSWORD }}" ssh -o StrictHostKeyChecking=no ubuntu@140.238.204.230 'cd bune-microservices && 
+          sudo git pull origin main && sudo docker compose pull && sudo docker compose up -d'
         env:
           DEPLOY_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
