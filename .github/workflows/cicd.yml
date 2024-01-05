@@ -1,4 +1,4 @@
-name: Docker Compose CI/CD Microservices
+name: Docker Compose CI/CD Microservices 
 
 on:
   push:
