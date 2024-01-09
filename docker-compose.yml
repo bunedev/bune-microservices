@@ -14,6 +14,7 @@ services:
     networks:
       - backend
       - auth-domain
+    command: sh -c "bun run db:init && bun dev"
   bune-blog:
     container_name: bune-blog
     image: devhoangkien/bune-blog:latest
@@ -22,9 +23,9 @@ services:
       - "9698:9698" # Cấu hình cổng bạn muốn sử dụng
     env_file:
       - env/blog.env # Sử dụng đường dẫn tương đối đến tệp .env
-    environment:
-      - APP_PORT=9698
-      - DATABASE_URL=postgresql://admin:master123@localhost:5432/bune-blog?schema=public
+    # environment:
+    #   - APP_PORT=9698
+    #   - DATABASE_URL=postgresql://admin:master123@postgres:5432/bune-blog?schema=public
     volumes:
       - blog-data:/app # Liên kết thư mục nguồn với container
     depends_on:
