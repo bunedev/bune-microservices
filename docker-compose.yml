@@ -14,7 +14,7 @@ services:
     networks:
       - backend
       - auth-domain
-    command: sh -c "bun run db:init && bun dev"
+    command: sh -c "bun install && bun prisma:generate && bun dev"
   bune-blog:
     container_name: bune-blog
     image: devhoangkien/bune-blog:latest
@@ -34,6 +34,8 @@ services:
     networks:
       - backend
       - blog-domain
+    command: sh -c "bun install && bun prisma:generate && bun dev"
+    
 
   bune-gateway:
     container_name: bune-gateway
