@@ -1,0 +1,18 @@
+{
+  "name": "microservices",
+  "scripts": {
+    "install:auth": "cd apps/servers/bune-auth && bun install",
+    "install:blog": "cd apps/servers/bune-blog && bun install",
+    "install:gateway": "cd apps/servers/bune-gateway && bun install",
+    "install:payment": "cd apps/servers/bune-payment && bun install",
+    "install:crawler": "cd apps/servers/bune-crawler && bun install",
+    "install:all": "bun run install:auth && bun run install:blog && bun run install:gateway && bun run install:payment && bun run install:crawler",
+
+    "build:auth": "cd apps/servers/bune-auth && bun run build",
+    "build:blog": "cd apps/servers/bune-blog && bun run build",
+    "build:gateway": "cd apps/servers/bune-gateway && bun run build",
+    "build:payment": "cd apps/servers/bune-payment && bun run build",
+    "build:crawler": "cd apps/servers/bune-crawler && bun run build",
+    "build:all": "bun run i:auth && bun run i:blog && bun run i:gateway && bun run i:payment && bun run i:crawler",
+  }
+}
