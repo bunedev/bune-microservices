@@ -14,5 +14,16 @@
     "build:payment": "cd apps/servers/bune-payment && bun run build",
     "build:crawler": "cd apps/servers/bune-crawler && bun run build",
     "build:all": "bun run i:auth && bun run i:blog && bun run i:gateway && bun run i:payment && bun run i:crawler",
+
+    "dev:auth": "cd apps/servers/bune-auth && cp .env.example .env && bun run dev",
+    "dev:blog": "cd apps/servers/bune-blog && bun run dev",
+    "dev:gateway": "cd apps/servers/bune-gateway && bun run dev",
+    "dev:payment": "cd apps/servers/bune-payment && bun run dev",
+    "dev:crawler": "cd apps/servers/bune-crawler && bun run dev",
+    "dev:all": "bun run i:auth && bun run i:blog && bun run i:gateway && bun run i:payment && bun run i:crawler",
+
+    "db:auth": "cd apps/servers/bune-auth && cp .env.example .env && bun db:init"
+
+
   }
 }

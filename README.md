@@ -22,3 +22,8 @@ v
 - Clone: `git clone https://github.com/bunedev/bune-microservices.git`
 - Use `git submodule update --init --recursive` command to update/fetch submodules.
 
+# Run docker
+## Run DB
+- docker-compose -f docker-compose-db.yml up -d 
+## Run Prod
+- docker compose up -d

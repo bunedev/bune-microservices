@@ -1,0 +1,33 @@
+version: '3'
+services:
+
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=master123
+      - POSTGRES_DB=postgres
+
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
+
+    # networks:
+    #   - backend
+  redis:
+    image: redis:latest
+    restart: always
+    command: redis-server --save --loglevel warning --requirepass master123
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    # networks:
+    #   - backend
+networks:
+  backend:
+volumes:
+  pg_data:
+  redis_data:

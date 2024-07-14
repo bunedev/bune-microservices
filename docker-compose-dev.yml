@@ -57,8 +57,10 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=master123
       - POSTGRES_DB=postgres
+
     volumes:
       - pg_data:/var/lib/postgresql/data
+      - ./pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
     networks:
       - backend
   redis:

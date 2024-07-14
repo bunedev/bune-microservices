@@ -5,7 +5,7 @@ services:
     ports:
       - "9697:9697" # Cấu hình cổng bạn muốn sử dụng
     env_file:
-      - env/auth.env 
+      - deploy/env/auth.env 
     volumes:
       - auth-data:/app 
     depends_on:
@@ -22,7 +22,7 @@ services:
     ports:
       - "9698:9698" # Cấu hình cổng bạn muốn sử dụng
     env_file:
-      - env/blog.env # Sử dụng đường dẫn tương đối đến tệp .env
+      - deploy/env/blog.env # Sử dụng đường dẫn tương đối đến tệp .env
     # environment:
     #   - APP_PORT=9698
     #   - DATABASE_URL=postgresql://admin:master123@postgres:5432/bune-blog?schema=public
@@ -44,7 +44,7 @@ services:
     ports:
       - "9000:9000" # Cấu hình cổng bạn muốn sử dụng
     env_file:
-      - env/gateway.env # Sử dụng đường dẫn tương đối đến tệp .env
+      - deploy/env/gateway.env # Sử dụng đường dẫn tương đối đến tệp .env
     volumes:
       - gateway-data:/app # Liên kết thư mục nguồn với container
     depends_on:
@@ -63,8 +63,10 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=master123
       - POSTGRES_DB=postgres
+
     volumes:
       - pg_data:/var/lib/postgresql/data
+      - ./pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
     networks:
       - backend
   redis:
